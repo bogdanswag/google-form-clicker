@@ -20,6 +20,8 @@ chrome_options.add_argument("--log-level=3")
 chrome_options.add_argument("--output=/dev/null")
 chrome_options.add_argument("--disable-application-cache")
 
+prefs = {"profile.managed_default_content_settings.images": 2}
+chrome_options.add_experimental_option("prefs", prefs)
 
 driver = webdriver.Chrome(options=chrome_options)
 
@@ -84,7 +86,7 @@ for clicks in range(500): # choose your range
         random_button = random.choice(group)
         ActionChains(driver).move_to_element(random_button).click(random_button).perform()
 
-    send_button = driver.find_element(By.XPATH, '//div[@role="button" and contains(@class, "uArJ5e") and .//span[text()="Отправить"]]')
+    send_button = driver.find_element(By.XPATH, '//div[@role="button" and contains(@class, "uArJ5e") and .//span[text()="Отправить"]]') # correct your Send-Selector
     ActionChains(driver).move_to_element(send_button).click(send_button).perform()
 
     time.sleep(2)
